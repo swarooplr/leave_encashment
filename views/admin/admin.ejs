@@ -1,0 +1,429 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:disabled="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ramaiah Memorial Hospital Leave Encashment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/adminstyle.css">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta charset="ISO-8859-1">
+
+    <script>
+        function showDetails(btId,descId) {
+            modal = document.getElementById(descId);
+            var btn = document.getElementById(btId);
+            modal.style.display = "block";
+        }
+        function onSpanClick(descId) {
+            var modal = document.getElementById(descId);
+            modal.style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        var totalPay=0;
+        var daa;
+        var basePay;
+        var btn;
+        var anchor;
+        var anchorreject;
+        var totalsumdisplay;
+        function calculateTotalPay(i) {
+            totalPay=0;
+            var a = "daa"+i;
+            var b= "basePay"+i;
+            daa = document.getElementById(a);
+            basePay = document.getElementById(b);
+            var c="approveanchor"+i;
+            var d="approvebt"+i;
+            var e="rejectanchor"+i;
+            btn=document.getElementById(d);
+            anchor=document.getElementById(c);
+            anchorreject = document.getElementById(e)
+            var e='totalsum'+i;
+            totalsumdisplay=document.getElementById(e);
+            totalPay = parseInt(basePay.value)*(parseInt(daa.value)/100) + parseInt(basePay.value);
+            totalPay=parseInt(totalPay);
+            if(isNaN(totalPay))
+            {alert("Please Enter valid BasePay and Daa");}
+            if(!isNaN(totalPay)){
+                if(btn.innerHTML==" APPROVE "){
+                    btn.disabled=false;
+                    var link='/requestprocessing/'+i+'/'+daa.value+'/'+basePay.value+'/approved';
+                    var link2='/requestprocessing/'+i+'/'+daa.value+'/'+basePay.value+'/rejected';
+                    anchor.setAttribute("href",link);
+                    anchorreject.setAttribute("href",link);
+                }
+                totalsumdisplay.innerHTML="Total : "+totalPay;
+            }
+        }
+    </script>
+
+    <style>
+        h1 {
+            display: block;
+            font-size: 2em;
+            margin-top: 0.7em;
+            margin-bottom: 0.7em;
+            margin-left: 0;
+            margin-right: 0;
+            text-align:right;
+            color:#FFFFFF;
+        }
+        footer{
+            color: #BF360C;
+            margin: 2em;
+            position:fixed;
+            bottom:0px;
+        }
+        div.logo{
+            background:#352960;
+            height:100%;
+            width: 100%;
+            margin : 0;
+            padding: 15px;
+        }
+        ul.mylist{
+            background-color:#352960;
+            color: white;
+            margin-top: 1px;
+        }
+        ul li.my{
+            background-color: #352960;
+            display: inline-block;
+            padding: 15px;
+            font-family:comic sans ms;
+            color: #ffffff;
+        }
+        ul a{
+            text-decoration: none;
+            color: #ffffff;
+        }
+        ul a:hover{
+            color: #352940;
+        }
+        body {
+            background: #ffffff;
+        }
+        table {
+            background-color:white;
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        tr:nth-child(even) td{
+            border-left: 1px solid #ffffff;
+        }
+    </style>
+
+
+</head>
+<body>
+
+
+<div class="logo">
+    <img src="/logo1.png" alt="Logo" width="220" height="70" align="left">
+    <h1>Human Resources department</h1>
+</div>
+
+
+<nav>
+    <ul class="mylist">
+        <li class="my"><b>Encashment Requests/Approvals</b></li>
+        <a href='/logout'><li class="my" style="float:right";>Logout</li></a>
+        <a href='/admin/generateReports'><li class="my" style="float:right";>Generate Report</li></a>
+        <a href='/admin/upload'><li class="my" style="float:right";>Upload data</li></a>
+
+    </ul>
+</nav>
+
+
+
+<script >
+    function change(a){
+        try{
+            method =  "post";
+            var form = document.createElement("form");
+            form.setAttribute("method", method);
+            form.setAttribute("action", "/admin/admin/change");
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name",'layoutid');
+            hiddenField.setAttribute("value",a);
+            form.appendChild(hiddenField);
+            document.body.appendChild(form);
+            form.submit();}
+        catch (err)
+        {alert(err.toString())};
+    }
+    function logout() {
+        alert("heere");
+    }
+    function generatereport() {
+        try{
+            method =  "post";
+            var form = document.createElement("form");
+            form.setAttribute("method", method);
+            form.setAttribute("action", "/admin/admin/generatereport");
+            document.body.appendChild(form);
+            form.submit();}
+        catch (err)
+        {alert(err.toString())};
+    }
+    function getindividualreport(a) {
+        a.rowIndex=a.rowIndex-1;
+        try{
+            method =  "post";
+            var form = document.createElement("form");
+            form.setAttribute("method", method);
+            form.setAttribute("action", "/admin/admin/getindividualreport");
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name",'index');
+            hiddenField.setAttribute("value",(a.rowIndex-2).toString());
+            form.appendChild(hiddenField);
+            document.body.appendChild(form);
+            form.submit();}
+        catch (err)
+        {alert(err.toString())};
+    }
+    function  removeapprovebutton(i) {
+        var a='approvebt'+i;
+        var btn=document.getElementById(a);
+        btn.disabled =true;
+        var c='rejectbt'+i;
+        var btreject = document.getElementById(c);
+        btreject.disabled=true;
+        var d='text'+i;
+        var text = document.getElementById(d);
+        text.innerHTML="Request Approved";
+        var b='calc'+i;
+        var btcalc = document.getElementById(b);
+        btcalc.disabled=true;
+    }
+    function  removerejectbutton(i) {
+        var a='approvebt'+i;
+        var btn=document.getElementById(a);
+        btn.disabled =true;
+        var c='rejectbt'+i;
+        var btreject = document.getElementById(c);
+        btreject.disabled=true;
+        var d='text'+i;
+        var text = document.getElementById(d);
+        text.innerHTML="Request Rejected";
+        var b='calc'+i;
+        var btcalc = document.getElementById(b);
+        btcalc.disabled=true;
+    }
+</script>
+
+
+
+<br>
+<div class="admin">
+    <center><h1>Welcome to Admin Page</h1></center>
+    <div id='cssmenu'>
+        <ul>
+
+            <%if(layout===1){%>
+            <li class='active' id="layout1"><a onclick="change(1)">Encashment Requests</a></li>
+            <li class='#' id="layout2"><a onclick="change(2)">Approved Requests</a></li>
+            <%}%>
+
+            <%if(layout===2){%>
+            <li class='#' id="layout1"><a onclick="change(1)">Encashment Requests</a></li>
+            <li class='active' id="layout2"><a onclick="change(2)">Approved Requests</a></li>
+            <%}%>
+
+
+        </ul>
+        <center><table>
+                <tr>
+                    <th>SL No</th>
+                    <th>Employee Id</th>
+                    <th>Empoyee name</th>
+                    <th>Department</th>
+                    <th>Type</th>
+                    <th>NoLeavesSurrendered </th>
+                </tr>
+                <tr>
+
+
+                    <% for(var i=0; i < data.length; i++) { %>
+                    <%if(layout===1) {%>
+                    <%if((data[i].approved=='pending')) {%>
+                <tr  onClick="showDetails('bt<%=i %>','<%=i%>')" >
+                    <td><%=i%></td>
+                    <td >
+                        <%= data[i].empId %>
+                    </td>
+                    <td><%= data[i].name %></td>
+                    <td><%= data[i].department %></td>
+                    <td><%= data[i].type %></td>
+                    <td><%= data[i].noLeavesSurrendered %></td>
+                </tr>
+                <% if(data[i].type=="EL")
+                {
+                %>
+                <div id="<%= i %>" class="modal" style="display : none;" >
+                    <!-- Modal content -->
+                    <div class="modal-content" style="margin:70px;margin-top:100px;padding:30px;">
+                        <span  class="close" style="padding:10px;" onClick="onSpanClick('<%=i %>')" >&times;</span>
+                        <div class="container">
+                            <div class="row">
+                                <div align="center" class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                                </div>
+                                <div align="center" class="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                    <br>
+                                    <legend>Employee Info</legend>
+                                    <div align="left" style="margin-top:80px;margin-left:30px;">
+                                        <strong>Staff No &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].empId %><br><br>
+                                        <strong>Name &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].name %><br><br>
+                                        <strong>Department &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].department %><br><br>
+                                        <strong>Leave Request Type &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].type %><br><br>
+                                        <strong>Number of Leaves Surrendered &emsp;:&emsp;&emsp;</strong><%= data[i].noLeavesSurrendered %><br><br>
+                                    </div>
+                                </div>
+                                <div align="center" class="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-xl-5" >
+                                    <br/>
+                                    <div class="form-style-5">
+                                        <fieldset >
+                                            <legend>Enter Info</legend>
+                                            <input id="<%='daa'+i%>" type="number" name="field1" placeholder="DAA" required="required"  style="color:blue" >
+                                            <input id="<%='basePay'+i%>" type="number" name="field2" placeholder="BasePay" required="required" style="color:blue">
+                                            <p id="<%='totalsum'+i%>" style="color:black;font-size: 40px;padding:10px;margin:30px;"> Total : </p>
+                                            <button id="<%='calc'+i%>" class="btn" onclick="calculateTotalPay(<%=i%>)" value="CALCULATE" style="color:#ffffff; background-color: #352960;width  :300px;">Calculate</button>
+                                        </fieldset>
+                                    </div>
+                                    <br><br><br>
+                                    <a id="<%='approveanchor'+i%>" href="#" ><button onclick="removeapprovebutton(<%=i%>)" disabled class="btn"  align="center" id="<%='approvebt'+i%>" style="color:#ffffff; background-color: #352960;width  :300px;" > APPROVE </button></a>
+                                    <br><br><br>
+                                    <a id="<%='rejectanchor'+i%>" href="<%='/requestprocessing/'+i+'/0/0'+'/rejected'%>" ><button onclick="removerejectbutton(<%=i%>)"  class="btn"  align="center" id="<%='rejectbt'+i%>" style="color:#ffffff; background-color: #352960;width  :300px;" > REJECT </button></a>
+                                    <br><br><br>
+                                    <h3 id="<%='text'+i%>"></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%
+                }
+                else{
+                %>                }
+                <div id="<%= i %>" class="modal" style="display : none;" >
+                    <!-- Modal content -->
+                    <div class="modal-content" style="margin:70px;margin-top:100px;padding:30px;">
+                        <span  class="close" style="padding:10px;" onClick="onSpanClick('<%=i %>')" >&times;</span>
+                        <div class="container">
+                            <div class="row">
+                                <div align="center" class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                                </div>
+                                <div align="center" class="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                    <br>
+                                    <legend>Employee Info</legend>
+                                    <div align="left" style="margin-top:80px;margin-left:30px;">
+                                        <strong>Staff No &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].empId %><br><br>
+                                        <strong>Name &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].name %><br><br>
+                                        <strong>Department &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].department %><br><br>
+                                        <strong>Leave Request Type &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:&emsp;&emsp;</strong><%= data[i].type %><br><br>
+                                        <strong>Number of Leaves Surrendered &emsp;:&emsp;&emsp;</strong><%= data[i].noLeavesSurrendered %><br><br>
+                                    </div>
+                                </div>
+                                <div align="center" class="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-xl-5" >
+                                    <br/>
+                                    <div class="form-style-5">
+                                        <fieldset >
+                                            <legend>Enter Info</legend>
+                                        </fieldset>
+                                    </div>
+                                    <br><br><br>
+                                    <a id="<%='approveanchor'+i%>" href="<%='/requestprocessing/'+i+'/0/0'+'/approved'%>" ><button onclick="removeapprovebutton(<%=i%>)" class="btn"  align="center" id="<%='approvebt'+i%>" style="color:#ffffff; background-color: #352960;width  :300px;" > APPROVE </button></a>
+                                    <br><br><br>
+                                    <a id="<%='rejectanchor'+i%>" href="<%='/requestprocessing/'+i+'/0/0'+'/rejected'%>" ><button onclick="removerejectbutton(<%=i%>)"  class="btn"  align="center" id="<%='rejectbt'+i%>" style="color:#ffffff; background-color: #352960;width  :300px;" > REJECT </button></a>
+                                    <br><br><br>
+                                    <h3 id="<%='text'+i%>"></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%
+                }
+                %>
+                <% } %>
+                <%}%>
+
+
+
+                <%if(layout===2) {%>
+                <%if((data[i].approved=='approved')) {%>
+                <tr   onclick="getindividualreport(this)">
+                    <td><%=i%></td>
+                    <td onclick="getindividualreport(this)">
+                        <%= data[i].empId %>
+                    </td>
+                    <td><%= data[i].name %></td>
+                    <td><%= data[i].department %></td>
+                    <td><%= data[i].type %></td>
+                    <td><%= data[i].noLeavesSurrendered %></td>
+                </tr>
+                <% } %>
+                <%}%>
+
+
+                <% } %>
+
+                </tr>
+
+
+
+
+
+
+
+
+            </table></center>
+    </div>
+
+</div>
+
+<footer >
+    <p>Powered by: Department of Information Science & Engineeering, Ramaih Institute of Technology - for: Human Resources Department, Ramaih Memorial Hospital</p>
+</footer>
+
+
+</body>
+</html>
+
+
+
+<!--function clicked(a) {
+a.rowIndex=a.rowIndex-1;
+try{
+method =  "post";
+var form = document.createElement("form");
+form.setAttribute("method", method);
+form.setAttribute("action", "/submit");
+var hiddenField = document.createElement("input");
+hiddenField.setAttribute("type", "hidden");
+hiddenField.setAttribute("name",'index');
+hiddenField.setAttribute("value",(a.rowIndex-2).toString());
+form.appendChild(hiddenField);
+document.body.appendChild(form);
+form.submit();}
+catch (err)
+{alert(err.toString())};
+}*/-->

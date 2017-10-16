@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>Ramaiah Memorial Hospital Leave Encashment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+
+
+    <style>
+        div.logo{
+            background:#352960;
+            height:100%;
+            width: 100%;
+            margin : 0;
+            padding: 15px;
+        }
+        ul.mylist{
+            background-color:#352960;
+            color: white;
+            margin-top: 1px;
+        }
+        ul li.my{
+            background-color: #352960;
+            display: inline-block;
+            padding: 15px;
+            font-family:comic sans ms;
+            color: #ffffff;
+        }
+
+        ul a{
+            text-decoration: none;
+            color: #ffffff;
+        }
+        ul a:hover{
+            color: #352940;
+        }
+        body {
+            background: #ffffff;
+        }
+
+
+
+
+        table {
+            background-color:white;
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        tr:nth-child(even) td{
+            border-left: 1px solid #ffffff;
+        }
+        h1 {
+            display: block;
+            font-size: 2em;
+            margin-top: 0.7em;
+            margin-bottom: 0.7em;
+            margin-left: 0;
+            margin-right: 0;
+            text-align:right;
+            color:#FFFFFF;
+        }
+
+        footer{
+            right: 0;
+            bottom: 0;
+            left: 0;
+            padding: 1rem;
+            color: #FFFFFF;
+            background-color: #352960;
+            text-align: center;
+        }
+
+
+    </style>
+
+
+</head>
+<body style="padding:0px;margin:0px">
+
+
+
+<div class="logo">
+    <img src="/logo1.png" alt="Logo" width="220" height="70" align="left">
+    <h1>Human Resources department</h1>
+</div>
+
+
+<nav>
+    <ul class="mylist">
+        <li class="my"><b>Upload Data</b></li>
+        <a href='/logout'><li class="my" style="float:right";>Logout</li></a>
+        <a href='/admin/generateReports'><li class="my" style="float:right";>Generate Report</li></a>
+        <a href='admin'><li class="my" style="float:right;">Encashment Requests</li></a>
+    </ul>
+</nav>
+
+
+<center>
+
+    <br><br>
+    <form action="processupload" method="post" enctype="multipart/form-data">
+        <input type="file" name="filetoupload" style="color : #ffffff;background : #352960;width: 300px;font-family:comic sans ms;"><br>
+        <input type="submit" value="Upload Employee Details"  class="form-control"  style="color : #ffffff;background : #352960;width: 300px;font-family:comic sans ms;">
+    </form>
+
+    <br><br>
+
+
+</center>
+
+<footer >
+    <p>Powered by: Department of Information Science & Engineeering, Ramaih Institute of Technology</p>
+</footer>
+
+
+<%if(alertreq){%>
+<script >
+    alert("successfully uploaded");
+</script>
+<%}%>
+
+</body>
+</html>

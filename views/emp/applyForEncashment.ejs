@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Ramaiah Memorial Hospital Leave Encashment</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<style>
+div.logo{
+background:#352960;
+height:100%;
+width: 100%;
+margin : 0;
+padding: 15px;
+}
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-top: 0.7em;
+    margin-bottom: 0.7em;
+    margin-left: 0;
+    margin-right: 0;
+    text-align:right;
+    color:#FFFFFF;
+}
+
+footer{
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    color: #FFFFFF;
+    background-color: #352960;
+    text-align: center;
+}
+ul.mylist{
+  background-color:#352960;
+  color: white;
+  margin-top: 1px;
+}
+ul li.my{
+  background-color: #352960;
+  display: inline-block;
+  padding: 15px;
+  font-family:comic sans ms;  
+  color: #ffffff;
+}
+
+ul a{
+  text-decoration: none;
+  color: #ffffff;
+}
+ul a:hover{
+  color: #352940;
+}
+body {
+  background: #ffffff;   
+}
+
+
+
+
+table {
+  background-color:white;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+tr:nth-child(even) td{
+    border-left: 1px solid #ffffff;
+}
+
+
+
+</style>
+<script type="text/javascript">
+  
+  function enablebt(name){
+
+    var bt;
+    switch(name){
+      case 'el' : bt = document.getElementById('btel');
+                  break;
+      case 'cl' : bt = document.getElementById('btcl');
+                  break;
+      case 'sl' : bt = document.getElementById('btsl');
+                  break;
+    }
+
+    
+    if(bt.disabled)
+      bt.disabled=false;
+    else
+      bt.disabled=true;
+
+  }
+
+</script>
+
+</head>
+<body style="padding:0px;margin:0px">
+
+<div class="logo">
+    <img src="/logo1.png" alt="Logo" width="220" height="70" align="left">
+    <h1>Human Resources department</h1>
+</div>
+
+
+<nav>
+<ul class="mylist">
+<li class="my"><b>Leave Encashment</b></li>
+<a href='/logout'><li class="my" style="float:right";>Logout</li></a>
+<a href='/emp/applyForEncashment'><li class="my" style="float:right";>Apply Encashment</li></a>
+<a href='/emp/profile'><li class="my" style="float:right";>My Profile</li></a>
+</ul>
+</nav>
+
+<% 
+if(obj!=""){
+%>
+<br><br>
+<h1 align="center"><%=obj.header%></h1>
+<p align="center" ><%=obj.msg%></p>
+<br><br>
+<%
+}
+%>
+<div class="container">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" >
+<div  style="border : 2px solid #352960; margin:5px; padding:5px;" >
+<h3 align="center" style="color : #352960; font-weight: bold;">Earned Leave Encashment</h3>
+<h5 align="center"> Rules & Conditions</h5>
+<ul>
+<li>Only Permenant employees can apply for EL Encashment</li>
+<li>EL Encashment can only be applied from 5th to 20th of every month</li>
+<li>Maximum of 30 days of EL's can be encashed</li>
+<li>Employee should have a minimum balance of 60 days of EL's</li>
+<li>EL's can be encashed once in two years</li>
+<li>Remaining EL's are carried forward to next year in year end</li>
+</ul>
+<div align="center">
+<br>
+<input type="checkbox" id="elbox" onclick="enablebt('el')" /> I Agree to Rules and Conditions.
+<br>
+<button disabled id="btel" class="btn" onclick="window.location.href='/emp/verifyEncashment/el'" align="center" style="background: #352960; color:#ffffff; border: 2px solid #352960; border-radius: 4px; margin : 10px;padding: 10px;">Apply For Encashment</button>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" >
+<div  style="border : 2px solid #352960; margin:5px; padding:5px;" >
+<h3 align="center" style="color : #352960; font-weight: bold;">Casual Leave Encashment</h3>
+<h5 align="center"> Rules & Conditions</h5>
+<ul>
+<li>Only Permenant employees can apply for CL Encashment</li>
+<li>CL Encashment can only be applied from 5th Jan to 20th Jan of every year</li>
+<li>5 Unutilized CL's from Jan to Dec of previous year is Encashble in the month of Jan Every Year</li>
+<li>There should be no LOP's in previous year</li>
+<li>Remaining CL's are lapsed</li>
+<br>
+</ul>
+<div align="center">
+<br>
+<input type="checkbox" id="clbox" onclick="enablebt('cl')" /> I Agree to Rules and Conditions.
+<br>
+<button disabled id="btcl" class="btn" onclick="window.location.href='/emp/verifyEncashment/cl'" align="center" style="background: #352960; color:#ffffff; border: 2px solid #352960; border-radius: 4px; margin : 10px;padding: 10px;">Apply For Encashment</button>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" >
+<div  style="border : 2px solid #352960; margin:5px; padding:5px;" >
+<h3 align="center" style="color : #352960; font-weight: bold;">Sick Leave Encashment</h3>
+<h5 align="center"> Rules & Conditions</h5>
+<ul>
+<li>Only Permenant employees can apply for SL Encashment</li>
+<li>SL Encashment can only be applied from 5th Jan to 20th Jan of every year</li>
+<li>5 Unutilized SL's from Jan to Dec of previous year is Encashble in the month of Jan Every Year</li>
+<li>There should be no LOP's in previous year</li>
+<li>Remaining SL's are carried forward to next year</li>
+</ul>
+<div align="center">
+<br>
+<input type="checkbox" id="slbox" onclick="enablebt('sl')" /> I Agree to Rules and Conditions.
+<br>
+<button disabled id="btsl" class="btn" onclick="window.location.href='/emp/verifyEncashment/sl'" align="center" style="background: #352960; color:#ffffff; border: 2px solid #352960; border-radius: 4px; margin : 10px;padding: 10px;">Apply For Encashment</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<br>
+
+<h3 align="center" style="color : #352960;  ">Pending Encashment Requests</h3>
+
+<hr size="20px" style="color :  #352960; border-width: 2px; border-color: #352960; margin-top : 0px;">
+<table>
+<tr>
+<th> Application Date </th><th> Application Type </th><th>Application Status</th>
+</tr>
+<%
+for(i=0;i<list.length;i++){
+%>
+<tr>
+<td> <%= list[i].applicationDate %> </td><td> <%= list[i].type %> </td><td> <%= list[i].approved %> </td>
+</tr>
+<%
+}
+%>
+</table>
+<br><br><br>
+<footer >
+    <p>Powered by: Department of Information Science & Engineeering, Ramaih Institute of Technology</p>
+</footer>
+
+</body>
+</html>

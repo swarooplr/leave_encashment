@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Ramaiah Memorial Hospital Leave Encashment</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<style>
+
+div.logo{
+background:#352960;
+height:100%;
+width: 100%;
+margin : 0;
+padding: 25px;
+}
+ul.mylist{
+  background-color:#352960;
+  color: white;
+  margin-top: 1px;
+}
+
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-top: 0.7em;
+    margin-bottom: 0.7em;
+    margin-left: 0;
+    margin-right: 0;
+    text-align:right;
+    color:#FFFFFF;
+}
+footer{
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    color: #FFFFFF;
+    background-color: #352960;
+    text-align: center;
+}
+
+ul li.my{
+  background-color: #352960;
+  display: inline-block;
+  padding: 15px;
+  font-family:comic sans ms;  
+  color: #ffffff;
+}
+
+ul a{
+  text-decoration: none;
+  color: #ffffff;
+}
+ul a:hover{
+  color: #352940;
+}
+body {
+  background: #ffffff;   
+}
+
+
+</style>
+
+
+</head>
+<body style="padding:0px;margin:0px">
+<style>
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.login-page {
+  width: 360px;
+  padding: 5% 0 0;
+  margin: auto;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #352960;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #352990;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+
+</style>
+
+<div class="logo">
+<img src="/logo1.png" alt="Logo" width="220" height="70" align="left">
+    <h1>Human Resources department</h1>
+</div>
+
+<h1 class = login-page>Leave Encashment System</h1>
+
+
+<div class="login-page">
+  <div class="form">
+  	<p align="center" ><%= message %> </p>
+    <form class="login-form" action="/validate" method="POST" >
+      <input type="text" name="username" placeholder="username"/><br>
+      <input type="password" name="password" placeholder="password"/><br>
+     <strong>Login As : </strong><input type="radio" checked name="admin" value="false" style="margin:10px;" />Employee
+     <input type="radio"  name="admin" value="true" style="margin:10px;" />Admin<br><br>
+	<button>login</button>
+    </form>
+  </div>
+</div>
+
+<footer >
+    <p>Powered by: Department of Information Science & Engineeering, Ramaih Institute of Technology</p>
+</footer>
+
+</body>
+
+</html>
