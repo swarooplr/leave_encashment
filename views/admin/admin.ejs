@@ -47,7 +47,7 @@
             anchorreject = document.getElementById(e)
             var e='totalsum'+i;
             totalsumdisplay=document.getElementById(e);
-            totalPay = parseInt(basePay.value)*(parseInt(daa.value)/100) + parseInt(basePay.value);
+            totalPay = parseInt(basePay.value)*(parseFloat(daa.value)/100) + parseInt(basePay.value);
             totalPay=parseInt(totalPay);
             if(isNaN(totalPay))
             {alert("Please Enter valid BasePay and Daa");}
