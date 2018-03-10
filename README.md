@@ -49,5 +49,7 @@ Database Structure(MongoDB) :
 
              db.reports.save({"_id" : 2017 , "sl" : [], "cl" : [], "el01" : [{"empId" : "emp1", "name" : "sagar", "designation" : "Acountant", "department" : "Accounts" , "dateOfApplication" : "7 01 2017" , "serialNumber" : 01 , "dateOfReceipt" : "9 01 2017", "leaveAtCredit" : 120 , "leaveSurrendered" : 30, "leaveBalance" : 90, "previousEncashment" : "20 01 2014" , "basicPay" : 1000, "daa" : 5, "total" : 1050,},{"empId" : "emp2", "name" : "sugam", "designation" : "TraineeNurse", "department" : "Nursing" , "dateOfApplication" : "5 01 2017" , "serialNumber" : 02 , "dateOfReceipt" : "15 01 2017", "leaveAtCredit" : 150 , "leaveSurrendered" : 30, "leaveBalance" : 120, "previousEncashment" : "28 01 2014" , "basicPay" : 1000, "daa" : 10, "total" : 1100,}]})
 
+5.msrmh:{ "_id" : "daa", "daaPassword" : "da#change", "daa" : 22 }
 
+       db.msrmh.insert({ "_id" : "daa", "da#change" : "abc", "daa" : 22 })
 
