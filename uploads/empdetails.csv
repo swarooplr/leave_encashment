@@ -1,5 +1,11 @@
 id ,name,designation,department,status,lop,slbalance,elbalance,clbalance,password,clpreviousencashment,slpreviousencashment,elpreviousencashment
-emp171,jan,billing,accounts,permanent,0,10,230,10,sagar,11/12/2017,11/12/2017,11/12/2017
-emp172,jan,billing,accounts,permanent,5,10,130,10,sagar,11/12/2017,11/12/2017,11/12/2017
-emp173,jan,billing,accounts,permanent,5,10,30,10,sagar,11/12/2017,11/12/2017,11/12/2017
-emp174,jan,billing,accounts,permanent,5,10,30,10,sagar,11/12/2017,11/12/2017,11/12/2017
+emp171,jan,billing,accounts,permanent,0,10,130,10,sagar,11/12/2017,11/12/2016,11/12/2016
+emp172,jan,billing,accounts,permanent,0,10,130,10,sagar,11/12/2017,11/12/2016,11/12/2016
+emp173,jan,billing,accounts,permanent,0,10,130,10,sagar,11/12/2017,11/12/2017,11/12/2016
+emp174,jan,billing,accounts,permanent,0,10,140,10,sagar,11/12/2017,11/12/2017,11/12/2016
+emp176,jan,billing,accounts,permanent,0,10,130,10,sagar,11/12/2017,11/12/2016,11/12/2016
+emp177,jan,billing,accounts,permanent,0,10,130,10,sagar,11/12/2017,11/12/2016,11/12/2016
+emp178,jan,billing,accounts,permanent,0,10,130,10,sagar,11/12/2017,11/12/2017,11/12/2016
+emp179,jan,billing,accounts,permanent,0,10,140,10,sagar,11/12/2017,11/12/2017,11/12/2016
+emp180,jan,billing,accounts,permanent,0,10,130,10,sagar,11/12/2017,11/12/2017,11/12/2016
+emp181,jan,billing,accounts,permanent,0,10,140,10,sagar,11/12/2017,11/12/2017,11/12/2016

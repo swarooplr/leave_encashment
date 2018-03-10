@@ -56,160 +56,201 @@ function onRequest(request,res) {
 
     console.log("Got a request for Processing...");
     if (request.session.admin && request.session.username) {
-        var form = new formidable.IncomingForm();
+        try {
+            var form = new formidable.IncomingForm();
+            console.log(request)
+            form.parse(request);
+            form.on('fileBegin', function (name, file) {
 
-        form.parse(request);
-        form.on('fileBegin', function (name, file){
-            file.path = './uploads/' + file.name;
-            process();
-            res.render('admin/upload',{alertreq:true},null);
+                if(!file.name=="") {
 
-        });
+
+                    file.path = './uploads/' + file.name;
+                    console.log(file.path)
+                    uploadStatus = process()
+                    if (uploadStatus)
+                        res.render('admin/upload', {alertreq: true}, null);
+                    else
+                        res.render('admin/upload', {alertreq: false}, null);
+                }else{
+                    res.render('admin/upload', {alertreq: false}, null);
+                }
+
+            });
+        }
+        catch (err){
+            console.log(err)
+            res.render('admin/upload', {alertreq: false}, null);
+        }
     }
 }
 
 function process(){
-    const csvFilePath='./uploads/empdetails.csv';
-    const csv=require('csvtojson')
-    csv()
-        .fromFile(csvFilePath)
-        .on("end_parsed",function(jsonArrayObj){ //when parse finished, result will be emitted here.
-            //console.log(jsonArrayObj);// write to data base here
+
+    try {
+        const csvFilePath = './uploads/empdetails.csv';
+        const csv = require('csvtojson')
+        csv()
+            .fromFile(csvFilePath)
+            .on("end_parsed", function (jsonArrayObj) { //when parse finished, result will be emitted here.
+                //console.log(jsonArrayObj);// write to data base here
 
 
-           writetodatabase(jsonArrayObj);
+                return writetodatabase(jsonArrayObj);
 
 
-        })
+            })
+    }catch (err){
+        console.log(err)
+        return false;
+    }
+
+    return true;
 
 }
 
 function writetodatabase(data)
 {
-    var i;
-    var emp;
-    for(i=0;i<data.length;i++)
-    {
+    try {
+        var i;
+        var emp;
+        for (i = 0; i < data.length; i++) {
 
-        (function() {
-            emp = data[i];
+            (function () {
+                emp = data[i];
 
-            var empid = emp.id;
-            var password = emp.password;
-            var admin = false;
-            var name = emp.name;
-            var department = emp.department;
-            var designation = emp.designation;
-            var permanant = true;
-            var clbalance = emp.clbalance;
-            var clpreviousechashment = emp.clpreviousencashment;
-            var slbalance = emp.slbalance;
-            var slpreviousechashment = emp.slpreviousencashment;
-            var elbalance = emp.elbalance;
-            var elpreviousechashment = emp.elpreviousencashment;
-            var lop = emp.lop;
+                var empid = emp.id;
+                var password = emp.password;
+                var admin = false;
+                var name = emp.name;
+                var department = emp.department;
+                var designation = emp.designation;
+                var permanant = true;
+                var clbalance = emp.clbalance;
+                var clpreviousechashment = emp.clpreviousencashment;
+                var slbalance = emp.slbalance;
+                var slpreviousechashment = emp.slpreviousencashment;
+                var elbalance = emp.elbalance;
+                var elpreviousechashment = emp.elpreviousencashment;
+                var lop = emp.lop;
 
-            console.log(emp);
+                console.log(emp);
 
-            try {
+                try {
 
-                userlogindata.findById(empid).then(function (doc) {
+                    userlogindata.findById(empid).then(function (doc) {
 
-                    if (doc) {
-                        console.log(password);
-                        doc.password = password;
-                        doc.save();
-
-                    }
-                    else {
-                        var x = new userlogindata({_id: empid, password: password, admin: admin});
-                        x.save();
-
-                    }
-
-
-                });
-
-
-                //var x=new userlogindata({_id:empid,password:password,admin:admin});
-                //x.save();
-
-                
-                empdetailsdata.findById(empid).then(function (doc) {
-
-                    if(doc)
-                    {
-
-                        if(password)
-                        doc.password=password;
-                       
-                        if(name)
-                        doc.name=name;
-                        
-                        if(department)
-                        doc.department=department;
-                        
-                        if(designation)
-                        doc.designation=designation;
-
-                        if(lop)
-                            doc.lop=lop;
-                        
-
-
-                        if(elpreviousechashment && slbalance && clbalance && elbalance)
-                        {var leaveDetails={
-                            sl:{ balance: slbalance, previousEncashment : slpreviousechashment },
-                            cl:{ balance: clbalance, previousEncashment : clpreviousechashment },
-                            el:{ balance: elbalance, previousEncashment : elpreviousechashment }
+                        if (doc) {
+                            console.log(password);
+                            doc.password = password;
+                            doc.save();
 
                         }
-                        doc.leaveDetails=leaveDetails;}
-                        else if(slbalance && clbalance && elbalance)
-                        {
-                            console.log(doc.leaveDetails.el.balance);
-                            var leaveDetails={
-                                sl:{ balance: slbalance, previousEncashment : doc.leaveDetails.sl.previousEncashment },
-                                cl:{ balance: clbalance, previousEncashment : doc.leaveDetails.cl.previousEncashment },
-                                el:{ balance: elbalance, previousEncashment : doc.leaveDetails.el.previousEncashment }
+                        else {
+                            var x = new userlogindata({_id: empid, password: password, admin: admin});
+                            x.save();
+
+                        }
+
+
+                    });
+
+
+                    //var x=new userlogindata({_id:empid,password:password,admin:admin});
+                    //x.save();
+
+
+                    empdetailsdata.findById(empid).then(function (doc) {
+
+                        if (doc) {
+
+                            if (password)
+                                doc.password = password;
+
+                            if (name)
+                                doc.name = name;
+
+                            if (department)
+                                doc.department = department;
+
+                            if (designation)
+                                doc.designation = designation;
+
+                            if (lop)
+                                doc.lop = lop;
+
+
+                            if (elpreviousechashment && slbalance && clbalance && elbalance) {
+                                var leaveDetails = {
+                                    sl: {balance: slbalance, previousEncashment: slpreviousechashment},
+                                    cl: {balance: clbalance, previousEncashment: clpreviousechashment},
+                                    el: {balance: elbalance, previousEncashment: elpreviousechashment}
+
+                                }
+                                doc.leaveDetails = leaveDetails;
                             }
-                            doc.leaveDetails=leaveDetails;
+                            else if (slbalance && clbalance && elbalance) {
+                                console.log(doc.leaveDetails.el.balance);
+                                var leaveDetails = {
+                                    sl: {
+                                        balance: slbalance,
+                                        previousEncashment: doc.leaveDetails.sl.previousEncashment
+                                    },
+                                    cl: {
+                                        balance: clbalance,
+                                        previousEncashment: doc.leaveDetails.cl.previousEncashment
+                                    },
+                                    el: {balance: elbalance, previousEncashment: doc.leaveDetails.el.previousEncashment}
+                                }
+                                doc.leaveDetails = leaveDetails;
+                            }
+
+
+                            doc.save();
+
+
                         }
+                        else {
+                            var leaveDetails = {
+                                sl: {balance: slbalance, previousEncashment: slpreviousechashment},
+                                cl: {balance: clbalance, previousEncashment: clpreviousechashment},
+                                el: {balance: elbalance, previousEncashment: elpreviousechashment}
+                            }
+
+                            var y = new empdetailsdata({
+                                _id: empid,
+                                name: name,
+                                department: department,
+                                designation: designation,
+                                permanant: permanant,
+                                leaveDetails: leaveDetails,
+                                lop: lop
+                            });
+                            y.save(function (err) {
+                                if (err)
+                                    console.log(err);
+                                else
+                                    console.log("succces");
+                            });
+                        }
+                    })
 
 
-                        
-                        doc.save();
-                        
-                        
-                    }
-                    else{
-                    var leaveDetails={
-                        sl:{ balance: slbalance, previousEncashment : slpreviousechashment },
-                        cl:{ balance: clbalance, previousEncashment : clpreviousechashment },
-                        el:{ balance: elbalance, previousEncashment : elpreviousechashment }
-                    }
+                } catch (err) {
+                    console.log("here")
+                    console.log(err);
+                }
 
-                    var y=new empdetailsdata({ _id : empid, name : name, department : department, designation : designation, permanant : permanant, leaveDetails : leaveDetails,lop:lop});
-                    y.save(function (err) {
-                        if(err)
-                            console.log(err);
-                        else
-                            console.log("succces");
-                    });}
-                })
+            })();
 
-                 
-
-
-            } catch (err) {
-                console.log(err);
-            }
-
-        })();
+        }
+        return true;
+    }catch(err){
+        console.log(err)
+        return true;
     }
 
-
-
+    return true;
 }
 
 /* csv format ----------

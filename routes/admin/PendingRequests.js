@@ -39,6 +39,15 @@ var requestData=mongoose.model('requestData',requests);
 
 var requestobj=[];
 
+var currentDaa;
+var daaPassword;
+var requestDaa=new Schema({
+    _id:String,
+    daa:Number,
+    daaPassword:String
+},{collection:'msrmh'});
+var requestDaa=mongoose.model('requestDaa',requestDaa);
+
 
 
 router.get('/',function (request,respond) {
@@ -48,7 +57,16 @@ router.get('/',function (request,respond) {
 
         var currentDate =new Date();
         var idforrequest=(currentDate.getMonth()+1)+" "+ currentDate.getFullYear();
-        
+
+
+        try{
+            requestDaa.findById("daa").then(function(doc){
+                currentDaa=doc.daa;
+                daaPassword=doc.password;
+            })
+        }catch (err){
+            console.log(err)
+        }
 
         
 
@@ -68,15 +86,39 @@ router.get('/',function (request,respond) {
                }
             
 
-            respond.render('admin/admin',{data:requestobj,layout:1},null)
+            respond.render('admin/admin',{data:requestobj,layout:1,currentDaa:currentDaa},null)
         });}
         catch (err){
             console.log(err);
-            respond.render('admin/admin',{data:requestobj,layout:1},null)
+            respond.render('admin/admin',{data:requestobj,layout:1,currentDaa:currentDaa},null)
         }
     }else{
         respond.render('login',{message : "Session Timed Out!! Please Login to continue"},null);
     }
+});
+
+router.post('/changeDaa',function (request,respond) {
+
+    if(request.session.admin && request.session.username){
+
+        console.log("new daa value")
+        console.log(request.body.entryDaa)
+
+        try{
+            requestDaa.findById("daa").then(function(doc){
+                doc.daa=parseFloat(request.body.entryDaa);
+                doc.save();
+            })
+        }catch (err){
+            console.log("error in uploading")
+        }
+
+        respond.redirect('/admin/admin');
+
+    }else{
+        respond.render('login',{message : "Session Timed Out!! Please Login to continue"},null);
+    }
+
 });
 
 
@@ -89,6 +131,9 @@ router.post('/change',function (request,respond,next) {
         var idforrequest=(currentDate.getMonth()+1)+" "+ currentDate.getFullYear();
 
 
+
+
+
          try{
          requestData.findById(idforrequest).then(function (doc) {
 
@@ -99,17 +144,17 @@ router.post('/change',function (request,respond,next) {
             if(request.body.layoutid==1)
             {
                 
-                respond.render('admin/admin',{data:requestobj,layout:1},null);
+                respond.render('admin/admin',{data:requestobj,layout:1,currentDaa:currentDaa},null);
             }
             else
             {
                 
-                respond.render('admin/admin',{data:requestobj,layout:2},null)
+                respond.render('admin/admin',{data:requestobj,layout:2,currentDaa:currentDaa},null)
             }
         });}
         catch(err){
             console.log(err);
-            respond.render('admin/admin',{data:requestobj,layout:1},null);
+            respond.render('admin/admin',{data:requestobj,layout:1,currentDaa:currentDaa},null);
         }
 
     }else{

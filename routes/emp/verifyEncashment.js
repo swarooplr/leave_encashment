@@ -180,7 +180,7 @@ function verifyEL(result){
 		return false;
 	}
 	else if(d.getDate()<5 || d.getDate()>20){
-		obj.header = "Sorry, Couldn't apply for EL Encashment"
+		obj.header = "Sorry, Couldn't apply for EL   Encashment"
 		obj.msg = "EL Encashment can only be applied from 5th to 20th of every month. "
 		return false;
 	}

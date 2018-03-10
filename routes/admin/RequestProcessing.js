@@ -109,7 +109,7 @@ router.get('/:slno/:daa/:basepay/:approved', function(req, respond, next) {
     slnumber=req.params.slno;
     daa=req.params.daa;
     basepay=req.params.basepay;
-    total=parseInt(basepay)*(parseInt(daa)/100)+parseInt(basepay);
+    total=parseInt(basepay)*(parseFloat(daa)/100)+parseInt(basepay);
     total=parseInt(total); //write correct logic
 
     var currentDate =new Date();

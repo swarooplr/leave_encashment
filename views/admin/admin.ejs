@@ -47,7 +47,7 @@
             anchorreject = document.getElementById(e)
             var e='totalsum'+i;
             totalsumdisplay=document.getElementById(e);
-            totalPay = parseInt(basePay.value)*(parseInt(daa.value)/100) + parseInt(basePay.value);
+            totalPay = parseInt(basePay.value)*(parseFloat(daa.value)/100) + parseInt(basePay.value);
             totalPay=parseInt(totalPay);
             if(isNaN(totalPay))
             {alert("Please Enter valid BasePay and Daa");}
@@ -153,6 +153,31 @@
 
 
 <script >
+
+    function validateDaaChange() {
+
+        var entryDaa=document.getElementById("entryDaa");
+        var password=document.getElementById("daaPassword");
+        try{
+            newDaa=parseFloat(entryDaa.value);
+            //alert(newDaa)
+            if(newDaa>100){
+                alert("Daa value Incorrect")
+            }
+            if(password.value=="da#change"){
+                return true;
+            }
+            else{
+                alert("Invalid Password");
+                return false;
+            }
+        }catch (err){
+            alert(err)
+            return false;
+        }
+        return false;
+    }
+
     function change(a){
         try{
             method =  "post";
@@ -302,7 +327,7 @@
                                     <div class="form-style-5">
                                         <fieldset >
                                             <legend>Enter Info</legend>
-                                            <input id="<%='daa'+i%>" type="number" name="field1" placeholder="DAA" required="required"  style="color:blue" >
+                                            <input id="<%='daa'+i%>" type="number" name="field1" placeholder="DAA" required="required"  style="color:blue" readonly value= <%= currentDaa%>>
                                             <input id="<%='basePay'+i%>" type="number" name="field2" placeholder="BasePay" required="required" style="color:blue">
                                             <p id="<%='totalsum'+i%>" style="color:black;font-size: 40px;padding:10px;margin:30px;"> Total : </p>
                                             <button id="<%='calc'+i%>" class="btn" onclick="calculateTotalPay(<%=i%>)" value="CALCULATE" style="color:#ffffff; background-color: #352960;width  :300px;">Calculate</button>
@@ -398,11 +423,24 @@
             </table></center>
     </div>
 
+
+
 </div>
 
-<footer >
-    <p>Powered by: Department of Information Science & Engineeering, Ramaiah Institute of Technology - for: Human Resources Department, Ramaiah Memorial Hospital</p>
-</footer>
+    <footer>
+        <p>Change DAA</p>
+    <form action="admin/changeDaa" onsubmit="return validateDaaChange()" method="post">
+        DAA <input id="entryDaa" type="text" name="entryDaa" value="">
+            Password <input id="daaPassword" type="text" name="daaPassword" >
+        <input id="submitDaa" type="submit" value="SUBMIT">
+    </form>
+        <p style="color:#352960; font-size: 150%;">Current DAA <%= currentDaa %></p>
+
+        <p>Powered by: Department of Information Science & Engineeering, Ramaiah Institute of Technology - for: Human Resources Department, Ramaiah Memorial Hospital</p>
+    </footer>
+
+
+
 
 
 </body>
