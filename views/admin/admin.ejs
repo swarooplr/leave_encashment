@@ -54,10 +54,10 @@
             if(!isNaN(totalPay)){
                 if(btn.innerHTML==" APPROVE "){
                     btn.disabled=false;
-                    var link='/requestprocessing/'+i+'/'+daa.value+'/'+basePay.value+'/approved';
-                    var link2='/requestprocessing/'+i+'/'+daa.value+'/'+basePay.value+'/rejected';
-                    anchor.setAttribute("href",link);
-                    anchorreject.setAttribute("href",link);
+                    var approveLink='/requestprocessing/'+i+'/'+daa.value+'/'+basePay.value+'/approved';
+                    var rejectLink='/requestprocessing/'+i+'/'+daa.value+'/'+basePay.value+'/rejected';
+                    anchor.setAttribute("href",approveLink);
+                    anchorreject.setAttribute("href",rejectLink);
                 }
                 totalsumdisplay.innerHTML="Total : "+totalPay;
             }
